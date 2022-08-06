@@ -24,6 +24,8 @@ persons = [
     }
 ]
 
+app.use(express.json())
+
 app.get('/info', (request, response) => {
     response.send(
         `<p>Phonebook has information for ${persons.length} people</p>\n<p>This message was created at ${Date()}</p>`
@@ -47,11 +49,29 @@ app.get('/api/persons/:id', (request, response) => {
     }
 })
 
-app.delete('/api/persons/:id', (request, response) =>{
+app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     persons = persons.filter(person => person.id !== id)
   
     response.status(204).end()
+})
+
+app.post('/api/persons', (request, response) => {
+    const body = request.body
+    console.log(body);
+    if (!body.name || !body.number){
+        return response.status(400).json({ 
+            error: 'Missing name or number' 
+        })
+    }
+
+    const person = {
+        id: Math.ceil(Math.random()*1000000000000000),
+        name: body.name,
+        number: body.number,
+    }
+    persons = persons.concat(person)
+    response.json(person)
 })
 
 const PORT = 3001
