@@ -1,0 +1,44 @@
+GET https://afternoon-sierra-18142.herokuapp.com/api/persons
+
+###
+GET https://afternoon-sierra-18142.herokuapp.com/info
+
+###
+GET https://afternoon-sierra-18142.herokuapp.com/api/persons/2
+
+###
+GET https://afternoon-sierra-18142.herokuapp.com/api/persons/666
+
+###
+DELETE https://afternoon-sierra-18142.herokuapp.com/api/persons/2
+
+###
+POST https://afternoon-sierra-18142.herokuapp.com/api/persons
+Content-Type: application/json
+
+{}
+
+###
+POST https://afternoon-sierra-18142.herokuapp.com/api/persons
+Content-Type: application/json
+
+{
+    "name": "foobar"
+}
+
+###
+POST https://afternoon-sierra-18142.herokuapp.com/api/persons
+Content-Type: application/json
+
+{
+    "number": 123
+}
+
+###
+POST https://afternoon-sierra-18142.herokuapp.com/api/persons
+Content-Type: application/json
+
+{
+    "name": "foobar",
+    "number": 123
+}
