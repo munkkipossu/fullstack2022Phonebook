@@ -1,6 +1,9 @@
+require('dotenv').config()
+
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+const Person = require('./models/person')
 
 const app = express()
 
@@ -42,26 +45,32 @@ app.get('/info', (request, response) => {
 ) 
 
 app.get('/api/persons', (request, response) => {
-    response.json(persons)
+    Person.find({}).then(result => {
+        response.json(result)
+    })
 })
 
 app.get('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    const person = persons.find(person => person.id === id)
-
-    if (person) {
-        response.json(person)
-    } else {
-        response.statusMessage = `Person not found with id "${id}"`
-        response.status(404).end()  
-    }
+    Person.findById(request.params.id)
+        .then(person => {
+            if (person) {
+                response.json(person)
+            }
+            else {
+                response.status(404).end()
+            }
+        })
+        .catch(error => {
+            console.log(error)
+            response.status(400).send({ error: 'malformatted id' })
+        })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    persons = persons.filter(person => person.id !== id)
-  
-    response.status(204).end()
+    Person.findByIdAndRemove(request.params.id).then(
+        result => {
+        response.status(204).end()
+    })
 })
 
 app.post('/api/persons', (request, response) => {
@@ -78,22 +87,24 @@ app.post('/api/persons', (request, response) => {
         })
     }
 
-    if (persons.map(p => p.name.toLowerCase()).includes(body.name.toLowerCase())){
-        return response.status(409).json({ 
-            error: 'Name exists in the phonebook already' 
-        })
-    }
+    Person.find({}).then(result => {
+        if (result.map(p => p.name.toLowerCase()).includes(body.name.toLowerCase())){
+            return response.status(409).json({ 
+                error: 'Name exists in the phonebook already' 
+            })
+        }
+    })
 
-    const person = {
-        id: Math.ceil(Math.random()*1000000000000000),
+    const person = Person({
         name: body.name,
         number: body.number,
-    }
-    persons = persons.concat(person)
-    response.json(person)
+    })
+    person.save().then(savedPerson => {
+        response.json(savedPerson)
+    })
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
