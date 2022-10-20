@@ -4,13 +4,16 @@ GET http://localhost:3001/api/persons
 GET http://localhost:3001/info
 
 ###
-GET http://localhost:3001/api/persons/63518828dfa5318f7b424a36
+GET http://localhost:3001/api/persons/62eeb8ee58df0c0487905719
 
 ###
 GET http://localhost:3001/api/persons/666
 
 ###
-DELETE http://localhost:3001/api/persons/63518828dfa5318f7b424a36
+GET http://localhost:3001/api/persons/6351936b3c440fff4b5d4812
+
+###
+DELETE http://localhost:3001/api/persons/6351936b3c440fff4b5d4812
 
 ###
 POST http://localhost:3001/api/persons
@@ -41,4 +44,13 @@ Content-Type: application/json
 {
     "name": "foobar",
     "number": 123
+}
+
+###
+PUT http://localhost:3001/api/persons/63519656de5dae1c38c39114
+Content-Type: application/json
+
+{
+    "name": "foobar",
+    "number": 321
 }

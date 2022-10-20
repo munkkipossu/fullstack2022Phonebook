@@ -55,10 +55,24 @@ app.get('/api/persons/:id', (request, response) => {
         })
 })
 
-app.put('api/persons/:id', (request, response) => {
-    Person.findByIdAndUpdate(request.params.id, {number: request.body.number}).then(
-        person => {response.json(person)}
-    )
+app.put('/api/persons/:id', (request, response, next) => {
+    const body = request.body
+    
+    Person.findByIdAndUpdate(request.params.id, {number: request.body.number}, {new: true})
+    .then(
+        updatedPerson => {
+            if (updatedPerson){
+                response.json(updatedPerson)
+            }
+            else {
+                response.status(400).end()
+            }
+    })
+    .catch(error => 
+        {
+            console.log(error)
+            next(error)
+        })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
