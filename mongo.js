@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 if (process.argv.length < 3) {
-  console.log('Please provide the password as an argument: node mongo.js <password>')
-  process.exit(1)
+    console.log('Please provide the password as an argument: node mongo.js <password>')
+    process.exit(1)
 }
 
 const password = process.argv[2]
@@ -19,13 +19,13 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model('person', personSchema)
 
 const getPersons = () => {
-    console.log("phonebook:");
+    console.log('phonebook:')
     mongoose
         .connect(url)
         .then(() => {
             Person.find({}).then(result => {
                 result.forEach(person => {
-                    console.log(person.name, person.number);
+                    console.log(person.name, person.number)
                 })
                 return mongoose.connection.close()
             })
@@ -37,7 +37,7 @@ const addPerson = (name, number) => {
     mongoose
         .connect(url)
         .then((result) => {
-            const person = new Person({name, number})
+            const person = new Person({ name, number })
             return person.save()
         })
         .then(() => {

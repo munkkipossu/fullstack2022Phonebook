@@ -53,14 +53,14 @@ Content-Type: application/json
 
 {
     "name": "foobar",
-    "number": 123
+    "number": "102-334455"
 }
 
 ###
-PUT http://localhost:3001/api/persons/63519656de5dae1c38c39114
+PUT http://localhost:3001/api/persons/635242ae220c04efa2792a0f
 Content-Type: application/json
 
 {
     "name": "foobar",
-    "number": 321
+    "number": "111-222222"
 }
