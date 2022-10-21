@@ -10,10 +10,10 @@ GET https://afternoon-sierra-18142.herokuapp.com/api/persons/62eeb8ee58df0c04879
 GET https://afternoon-sierra-18142.herokuapp.com/api/persons/666
 
 ###
-GET https://afternoon-sierra-18142.herokuapp.com/api/persons/6351936b3c440fff4b5d4812
+GET https://afternoon-sierra-18142.herokuapp.com/api/persons/635282147aca1723dec7d331
 
 ###
-DELETE https://afternoon-sierra-18142.herokuapp.com/api/persons/6351936b3c440fff4b5d4812
+DELETE https://afternoon-sierra-18142.herokuapp.com/api/persons/635282147aca1723dec7d331
 
 ###
 POST https://afternoon-sierra-18142.herokuapp.com/api/persons
@@ -51,7 +51,7 @@ POST https://afternoon-sierra-18142.herokuapp.com/api/persons
 Content-Type: application/json
 
 {
-    "name": "foobar",
+    "name": "foobar2",
     "number": "102-334455"
 }
 
